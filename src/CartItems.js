@@ -4,7 +4,7 @@ class CartItem extends React.Component{
   constructor(){
     super();
     this.state = {
-      price: 999,
+      price: 100,
       title: 'Phone',
       qty: 1,
       img: ''
@@ -12,7 +12,30 @@ class CartItem extends React.Component{
   }
 
   increaseQuantity = () =>{
-    this.state.qty += 1;
+    //setState re renders the compenent and do shallow merging
+    //set state form 1 
+    // this.setState({
+    //   qty: this.state.qty + 1
+    // })
+
+    //set state form 2 - callback function
+    this.setState((prevState) => {
+      //console.log(prevState);
+      return{
+        qty: prevState.qty + 1
+      }
+    })
+  }
+
+  decreseQuantity = () =>{
+    if(this.state.qty > 1 ){
+      this.setState((prevState) => {
+        return{
+          qty: prevState.qty - 1
+        }
+      })
+    }
+    
   }
   render(){
     let {price, title, qty} = this.state;
@@ -37,7 +60,8 @@ class CartItem extends React.Component{
             <img 
               alt='decrease' 
               className='action-icons' 
-              src='https://cdn-icons-png.flaticon.com/512/992/992683.png' 
+              src='https://cdn-icons-png.flaticon.com/512/992/992683.png'
+              onClick={this.decreseQuantity} 
             />
             <img 
               alt='delete' 
