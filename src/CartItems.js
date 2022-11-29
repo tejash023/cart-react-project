@@ -1,15 +1,7 @@
 import React from 'react';
 
 class CartItem extends React.Component{
-  constructor(){
-    super();
-    this.state = {
-      price: 100,
-      title: 'Phone',
-      qty: 1,
-      img: ''
-    }
-  }
+
 
   increaseQuantity = () =>{
     //setState re renders the compenent and do shallow merging
@@ -38,7 +30,7 @@ class CartItem extends React.Component{
     
   }
   render(){
-    let {price, title, qty} = this.state;
+    let {price, title, qty} = this.props.product;
 
     return(
       <div className = "cart-item">
