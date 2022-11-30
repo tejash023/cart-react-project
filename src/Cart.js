@@ -3,6 +3,7 @@ import CartItem from './CartItems';
 
 class Cart extends React.Component{
 
+  //state
   constructor(){
     super();
     this.state = {
@@ -33,26 +34,19 @@ class Cart extends React.Component{
     }
   }
 
+  //to increase quantity
   handleIncreaseQuantity = (product) => {
-    //console.log('product', product)
+    
     const {products} = this.state;
-    //.log('this.state', this.state);
     const index = products.indexOf(product);
-    //console.log('index', index);
-
-    //console.log('index qty',products[index].qty);
-
-    
-      products[index].qty += 1;
-    
-    
-
+    products[index].qty += 1;
     this.setState({
       products
     })
 
   }
 
+  //to decrease quantity
   handleDecreaseQuantity = (product) => {
     const {products} = this.state;
     const index = products.indexOf(product);
@@ -60,11 +54,13 @@ class Cart extends React.Component{
     if(products[index].qty > 1){
       products[index].qty -= 1;
     }
+
     this.setState({
       products
     })
   }
 
+  //to delete product
   handleDeleteProduct = (id) => {
     const {products} = this.state;
     const items = products.filter((item) => item.id !== id);
@@ -74,6 +70,7 @@ class Cart extends React.Component{
     })
   }
  
+  //render
   render(){
     
     const { products } = this.state;
