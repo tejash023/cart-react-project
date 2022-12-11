@@ -71,7 +71,7 @@ class App extends React.Component {
     })
   }
 
-  //car count
+  //cart count
   getCartCount = () =>{
     const {products} = this.state;
     let count = 0;
