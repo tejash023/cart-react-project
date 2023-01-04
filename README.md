@@ -1,3 +1,3 @@
-# Creating a shopping cart using create-react-app
+# Creating a shopping cart using create-react-app and firebase
 
 
