@@ -1,6 +1,8 @@
 import React from "react";
 import Cart from "./Cart";
-import Navbar from "./Navbar"
+import Navbar from "./Navbar";
+import firebase from 'firebase/compat/app';
+
 
 class App extends React.Component {
 
@@ -9,31 +11,31 @@ class App extends React.Component {
     super();
     this.state = {
       products:[
-        {
-          price: 899,
-          title: 'iPhone 13 Pro',
-          qty: 1,
-          img: 'https://m.media-amazon.com/images/I/61AwGDDZd3L._SL1500_.jpg',
-          id:1
-        },
-        {
-          price: 7200,
-          title: 'iPhone 12',
-          qty: 5,
-          img: 'https://m.media-amazon.com/images/I/317JiGToz-L.jpg',
-          id: 2
-        },
-        {
-          price: 9987,
-          title: 'Samsung S22+',
-          qty: 10,
-          img: 'https://m.media-amazon.com/images/I/71wGLBDEsvL._SX679_.jpg',
-          id:3
-        }
-        
       ]
     }
   }
+
+  componentDidMount() {
+    firebase
+      .firestore()
+      .collection('products')
+      .get()
+      .then((snapshot) => {
+        
+
+        const products = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          data['id']= doc.id;
+          return data;
+        })
+
+        this.setState({
+          products
+        })
+      })
+  }
+
+
 
   //to increase quantity
   handleIncreaseQuantity = (product) => {
